@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Books — BookWorm</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    mark {
+      background: rgba(196,151,58,0.3);
+      color: var(--text-primary);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+    .add-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--accent-main);
+      color: #fff;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(139,26,26,0.4);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+    .add-fab:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 8px 30px rgba(139,26,26,0.5);
+    }
+    .entry-count-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────── -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">📚</span>
+        BookWorm
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 <span>Home</span></a></li>
+        <li><a href="books.html" class="active">📖 <span>Books</span></a></li>
+        <li><a href="movies.html">🎬 <span>Movies</span></a></li>
+        <li><a href="analytics.html">📊 <span>Analytics</span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Page Header ───────────────────────────── -->
+  <header class="page-header">
+    <h1>My Book Collection</h1>
+    <p>Every page turned is a world discovered</p>
+  </header>
+
+  <main class="page-wrap">
+
+    <!-- ── Stats Bar ─────────────────────────── -->
+    <div class="stats-bar">
+      <div class="stat-pill">
+        <span class="stat-dot dot-gold"></span>
+        Total: <strong id="stat-total">0</strong>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-dot dot-green"></span>
+        Read: <strong id="stat-read">0</strong>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-dot dot-blue"></span>
+        Reading: <strong id="stat-reading">0</strong>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-dot dot-red"></span>
+        Wishlist: <strong id="stat-wishlist">0</strong>
+      </div>
+      <button id="add-book-btn" class="btn btn-primary" style="margin-left:auto">
+        ＋ Add Book
+      </button>
+    </div>
+
+    <!-- ── Tabs ──────────────────────────────── -->
+    <div class="tabs-bar">
+      <button class="tab-btn active" data-tab="library">
+        📚 My Library
+      </button>
+      <button class="tab-btn" data-tab="wishlist">
+        📋 Wishlist
+      </button>
+    </div>
+
+    <!-- ── Import / Export Bar ───────────────── -->
+    <div class="io-bar">
+      <span class="io-label">📊 Data</span>
+      <button id="export-btn" class="btn btn-outline btn-sm">⬇ Export Excel</button>
+      <button id="import-btn" class="btn btn-outline btn-sm">⬆ Import Excel</button>
+      <button id="template-btn" class="btn btn-outline btn-sm">📄 Template</button>
+      <input type="file" id="import-input" accept=".xlsx,.xls,.csv" style="display:none" />
+    </div>
+
+    <!-- ── Controls Bar ──────────────────────── -->
+    <div class="controls-bar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search by title, author, notes…"
+          autocomplete="off"
+        />
+      </div>
+      <select id="genre-filter" class="filter-select">
+        <option value="">All Genres</option>
+      </select>
+      <div class="sort-wrap">
+        <button class="sort-btn active" data-sort="dateAdded" title="Sort by date added">
+          🕐 Recent
+        </button>
+        <button class="sort-btn" data-sort="title" title="Sort by title">
+          🔤 A–Z
+        </button>
+        <button class="sort-btn" data-sort="rating" title="Sort by rating">
+          ⭐ Rating
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Results Count ─────────────────────── -->
+    <div class="entry-count-wrap">
+      Showing <strong id="entry-count">0</strong> entries
+    </div>
+
+    <!-- ── Cards Grid ────────────────────────── -->
+    <div id="cards-grid" class="cards-grid">
+      <!-- Populated by books.js -->
+    </div>
+
+  </main>
+
+  <!-- ── Floating Add Button (mobile) ─────────── -->
+  <button class="add-fab" id="add-fab" aria-label="Add book" title="Add a book">＋</button>
+
+  <!-- ════════════════════════════════════════════
+       BOOK MODAL
+  ════════════════════════════════════════════ -->
+  <div id="book-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+    <div class="modal">
+
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-heading">Add a New Book</h2>
+        <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      </div>
+
+      <form id="book-form" novalidate>
+        <div class="modal-body">
+
+          <!-- Title -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="book-title">Book Title *</label>
+              <input
+                type="text"
+                id="book-title"
+                class="form-input"
+                placeholder="e.g. The Great Gatsby"
+                required
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+          <!-- Author & Genre -->
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label class="form-label" for="book-author">Author / Writer</label>
+              <input
+                type="text"
+                id="book-author"
+                class="form-input"
+                placeholder="e.g. F. Scott Fitzgerald"
+                autocomplete="off"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="book-genre">Genre</label>
+              <select id="book-genre" class="form-select">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+          </div>
+
+          <!-- Status & Date Read -->
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label class="form-label" for="book-status">Status</label>
+              <select id="book-status" class="form-select">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="book-dateRead">Date Read</label>
+              <input
+                type="date"
+                id="book-dateRead"
+                class="form-input"
+              />
+            </div>
+          </div>
+
+          <!-- Pages & Rating -->
+          <div class="form-row cols-2">
+            <div class="form-group">
+              <label class="form-label" for="book-pages">Pages</label>
+              <input
+                type="number"
+                id="book-pages"
+                class="form-input"
+                placeholder="e.g. 320"
+                min="1"
+                max="9999"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rating</label>
+              <div class="star-rating-input" role="group" aria-label="Rating">
+                <span class="star" role="button" tabindex="0" aria-label="1 star">★</span>
+                <span class="star" role="button" tabindex="0" aria-label="2 stars">★</span>
+                <span class="star" role="button" tabindex="0" aria-label="3 stars">★</span>
+                <span class="star" role="button" tabindex="0" aria-label="4 stars">★</span>
+                <span class="star" role="button" tabindex="0" aria-label="5 stars">★</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="book-notes">Notes / Review</label>
+              <textarea
+                id="book-notes"
+                class="form-textarea"
+                rows="3"
+                placeholder="Your thoughts, favourite quotes, what moved you…"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Auto-fill hint -->
+          <p style="font-family:var(--font-alt);font-size:0.78rem;color:var(--text-muted);font-style:italic;margin-top:0.25rem;">
+            ✨ <em>Type a title above</em> — author, genre &amp; page count auto-fill from Open Library.
+          </p>
+
+        </div><!-- /modal-body -->
+
+        <div class="modal-footer">
+          <button type="button" id="modal-cancel" class="btn btn-outline">Cancel</button>
+          <button type="submit" id="modal-submit" class="btn btn-primary">Add Book</button>
+        </div>
+      </form>
+
+    </div><!-- /modal -->
+  </div><!-- /modal-overlay -->
+
+  <!-- ── Footer ────────────────────────────────── -->
+  <footer>
+    <p>
+      <span>BookWorm</span> — your reading diary, forever private.
+      <br />
+      <small>All data stored in your browser's local storage.</small>
+    </p>
+  </footer>
+
+  <!-- ── Scripts ───────────────────────────────── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui-utils.js"></script>
+  <script src="js/excel.js"></script>
+  <script src="js/autofill.js"></script>
+  <script src="js/books.js"></script>
+  <script>
+    // FAB also opens modal
+    document.getElementById('add-fab').addEventListener('click', () => {
+      document.getElementById('add-book-btn').click();
+    });
+    // Wire up autofill after page load
+    document.addEventListener('DOMContentLoaded', () => {
+      AutoFill.attachBookAutofill();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+/* ================================================
+   BookWorm — Movies Section Override
+   Accent: Cinematic Deep Navy / Silver
+   ================================================ */
+
+/* Override accent color for movies pages */
+.movies-theme {
+  --accent-main:    #1A3A6B;
+  --accent-hover:   #122A50;
+  --accent-gold:    #8BA7D4;
+  --accent-gold-lt: #B8CCEA;
+}
+
+.movies-theme .tab-btn.active {
+  color: #1A3A6B;
+  border-bottom-color: #1A3A6B;
+}
+
+.movies-theme .entry-card::before {
+  background: #1A3A6B;
+}
+
+.movies-theme .tag-genre {
+  background: rgba(26,58,107,0.1);
+  color: #1A3A6B;
+  border-color: rgba(26,58,107,0.25);
+}
+
+.movies-theme .btn-primary {
+  background: #1A3A6B;
+  border-color: #1A3A6B;
+}
+.movies-theme .btn-primary:hover {
+  background: #122A50;
+  border-color: #122A50;
+}
+
+.movies-theme .btn-gold {
+  background: #1A3A6B;
+  color: #fff;
+  border-color: #1A3A6B;
+}
+.movies-theme .btn-gold:hover {
+  background: #122A50;
+}
+
+.movies-theme .form-input:focus,
+.movies-theme .form-select:focus,
+.movies-theme .form-textarea:focus {
+  border-color: #1A3A6B;
+  box-shadow: 0 0 0 3px rgba(26,58,107,0.15);
+}
+
+.movies-theme .search-input:focus {
+  border-color: #1A3A6B;
+  box-shadow: 0 0 0 3px rgba(26,58,107,0.12);
+}
+
+.movies-theme .count-badge {
+  background: #1A3A6B;
+}
+
+.movies-theme .stat-pill strong {
+  color: #1A3A6B;
+}
+
+.movies-theme .dot-accent {
+  background: #1A3A6B;
+}
+
+.movies-theme .sort-btn:hover,
+.movies-theme .sort-btn.active {
+  color: #1A3A6B;
+  border-color: #1A3A6B;
+  background: rgba(26,58,107,0.07);
+}
+
+/* Film strip decorative element */
+.film-strip-deco {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0.5rem;
+  opacity: 0.35;
+}
+.film-hole {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--text-secondary);
+  flex-shrink: 0;
+}
+.film-bar {
+  flex: 1;
+  height: 2px;
+  background: var(--border-color);
+}

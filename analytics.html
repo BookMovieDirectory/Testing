@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analytics — BookWorm</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+  <link rel="stylesheet" href="css/analytics.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────── -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span>📚</span> BookWorm
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 <span>Home</span></a></li>
+        <li><a href="books.html">📖 <span>Books</span></a></li>
+        <li><a href="movies.html">🎬 <span>Movies</span></a></li>
+        <li><a href="analytics.html" class="active">📊 <span>Analytics</span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Header ────────────────────────────────── -->
+  <header class="dash-header">
+    <div class="dash-title-wrap">
+      <h1>Your Reading Intelligence</h1>
+      <p>Patterns, passions, and progress — beautifully revealed</p>
+    </div>
+    <div class="dash-period">
+      <span style="font-size:0.78rem;color:var(--an-text-3);font-style:italic;font-family:'EB Garamond',serif">
+        All data from your device &nbsp;🔒
+      </span>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       DASHBOARD
+  ═══════════════════════════════════════════════ -->
+  <div class="dashboard">
+
+    <!-- ── Row 1: Hero Stats ─────────────────── -->
+    <div class="stat-row">
+
+      <div class="stat-card" style="--stat-accent:#C4973A">
+        <span class="stat-card-icon">📚</span>
+        <div class="stat-card-value">
+          <span id="hs-books-read">0</span>
+        </div>
+        <div class="stat-card-label">Books Read</div>
+        <div class="stat-card-sub" id="hs-books-sub">Loading…</div>
+      </div>
+
+      <div class="stat-card" style="--stat-accent:#4A8CD4">
+        <span class="stat-card-icon">🎬</span>
+        <div class="stat-card-value">
+          <span id="hs-movies-watched">0</span>
+        </div>
+        <div class="stat-card-label">Films Watched</div>
+        <div class="stat-card-sub" id="hs-movies-sub">Loading…</div>
+      </div>
+
+      <div class="stat-card" style="--stat-accent:#D4603A">
+        <span class="stat-card-icon">📄</span>
+        <div class="stat-card-value">
+          <span id="hs-pages">0</span>
+        </div>
+        <div class="stat-card-label">Pages Devoured</div>
+        <div class="stat-card-sub" id="hs-pages-sub">Add page counts!</div>
+      </div>
+
+      <div class="stat-card" style="--stat-accent:#4CAF50">
+        <span class="stat-card-icon">⭐</span>
+        <div class="stat-card-value">
+          <span id="hs-avg-rating">0.0</span>
+          <span class="unit">/ 5</span>
+        </div>
+        <div class="stat-card-label">Avg. Rating</div>
+        <div class="stat-card-sub" id="hs-rating-sub">Across all ratings</div>
+      </div>
+
+    </div><!-- /stat-row -->
+
+    <!-- ── Row 2: Activity Chart (full width) ─ -->
+    <div class="an-card">
+      <div class="an-card-header">
+        <span class="an-card-title">📅 Activity — Last 12 Months</span>
+        <span style="font-size:0.75rem;color:var(--an-text-3);font-style:italic;font-family:'EB Garamond',serif">
+          Books &amp; movies added per month
+        </span>
+      </div>
+      <div class="an-card-body">
+        <div class="chart-wrap" style="height:240px">
+          <canvas id="activity-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Row 3: Genre Charts ────────────────── -->
+    <div class="grid-2">
+
+      <!-- Books Genre -->
+      <div class="an-card">
+        <div class="an-card-header">
+          <span class="an-card-title">📖 Book Genres</span>
+        </div>
+        <div class="an-card-body" style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap">
+          <div class="chart-wrap" style="width:180px;height:180px;flex-shrink:0;position:relative">
+            <canvas id="book-genre-chart"></canvas>
+          </div>
+          <div style="flex:1;min-width:120px">
+            <div class="genre-legend" id="book-genre-legend">
+              <div class="an-empty"><div class="an-empty-icon">📚</div>No books yet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movies Genre -->
+      <div class="an-card">
+        <div class="an-card-header">
+          <span class="an-card-title">🎬 Movie Genres</span>
+        </div>
+        <div class="an-card-body" style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap">
+          <div class="chart-wrap" style="width:180px;height:180px;flex-shrink:0;position:relative">
+            <canvas id="movie-genre-chart"></canvas>
+          </div>
+          <div style="flex:1;min-width:120px">
+            <div class="genre-legend" id="movie-genre-legend">
+              <div class="an-empty"><div class="an-empty-icon">🎬</div>No movies yet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /grid-2 -->
+
+    <!-- ── Row 4: Ratings + Status ───────────── -->
+    <div class="grid-2">
+
+      <!-- Rating Distribution -->
+      <div class="an-card">
+        <div class="an-card-header">
+          <span class="an-card-title">⭐ Rating Distribution</span>
+        </div>
+        <div class="an-card-body">
+          <p style="font-size:0.78rem;color:var(--an-text-3);font-style:italic;font-family:'EB Garamond',serif;margin-bottom:1rem">Books</p>
+          <div class="rating-hist" id="book-rating-hist"></div>
+          <p style="font-size:0.78rem;color:var(--an-text-3);font-style:italic;font-family:'EB Garamond',serif;margin:1.5rem 0 1rem">Movies</p>
+          <div class="rating-hist" id="movie-rating-hist"></div>
+        </div>
+      </div>
+
+      <!-- Status Overview -->
+      <div class="an-card">
+        <div class="an-card-header">
+          <span class="an-card-title">📊 Status Breakdown</span>
+        </div>
+        <div class="an-card-body">
+          <div class="goals-wrap" id="status-overview">
+            <div class="an-empty">Loading…</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /grid-2 -->
+
+    <!-- ── Row 5: Goals + Top Rated ──────────── -->
+    <div class="grid-3">
+
+      <!-- Reading Goals -->
+      <div class="an-card">
+        <div class="an-card-header">
+          <span class="an-card-title">🎯 Reading Goals — <span id="current-year"></span></span>
+        </div>
+        <div class="an-card-body">
+          <div class="goals-wrap" id="goals-wrap">
+            <div class="an-empty">Loading…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Rated Combined -->
+      <div class="an-card">
+        <div class="an-card-header">
+          <span class="an-card-title">🏆 Your Top Reads</span>
+        </div>
+        <div class="an-card-body">
+          <p style="font-size:0.75rem;color:var(--an-text-3);text-transform:uppercase;letter-spacing:0.08em;font-family:'Lora',serif;font-weight:600;margin-bottom:0.75rem">Books</p>
+          <div class="top-list" id="top-books-list"></div>
+
+          <div class="an-divider" style="margin:1.25rem 0"></div>
+
+          <p style="font-size:0.75rem;color:var(--an-text-3);text-transform:uppercase;letter-spacing:0.08em;font-family:'Lora',serif;font-weight:600;margin-bottom:0.75rem">Movies</p>
+          <div class="top-list" id="top-movies-list"></div>
+        </div>
+      </div>
+
+    </div><!-- /grid-3 -->
+
+    <!-- ── Row 6: Recent Activity ─────────────── -->
+    <div class="an-card">
+      <div class="an-card-header">
+        <span class="an-card-title">🕐 Recent Activity</span>
+        <span style="font-size:0.75rem;color:var(--an-text-3);font-style:italic;font-family:'EB Garamond',serif">
+          Your latest additions
+        </span>
+      </div>
+      <div class="an-card-body">
+        <div class="activity-feed" id="activity-feed">
+          <div class="an-empty"><div class="an-empty-icon">📋</div>No entries yet. Start adding!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Footer gap ─────────────────────────── -->
+    <div style="height:1rem"></div>
+
+  </div><!-- /dashboard -->
+
+  <!-- ── Footer ────────────────────────────────── -->
+  <footer style="
+    background:var(--an-surface);
+    color:var(--an-text-3);
+    text-align:center;
+    padding:1.5rem;
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:0.88rem;
+    border-top:1px solid var(--an-border);
+  ">
+    <span style="color:var(--an-gold)">BookWorm</span> Analytics — all insights are derived from your local data only.
+  </footer>
+
+  <!-- ── Scripts ───────────────────────────────── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/analytics.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
