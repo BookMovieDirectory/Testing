@@ -134,8 +134,8 @@ const BooksPage = (() => {
           valB = b.dateRead || '';
           break;
         default:
-          valA = a.dateAdded || '';
-          valB = b.dateAdded || '';
+          valA = a.dateRead || '';
+          valB = b.dateRead || '';
       }
       if (valA < valB) return state.sortDir === 'asc' ? -1 : 1;
       if (valA > valB) return state.sortDir === 'asc' ? 1 : -1;
