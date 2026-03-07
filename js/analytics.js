@@ -485,12 +485,12 @@ const Analytics = (() => {
     const currentYear = new Date().getFullYear();
     const booksReadThisYear = books.filter(b => {
       if (b.status !== 'Read') return false;
-      const d = new Date(b.dateRead || b.dateAdded || '');
+      const d = new Date(b.dateRead || '');
       return !isNaN(d) && d.getFullYear() === currentYear;
     }).length;
     const moviesThisYear = movies.filter(m => {
       if (m.status !== 'Watched') return false;
-      const d = new Date(m.dateWatched || m.dateAdded || '');
+      const d = new Date(m.dateWatched || '');
       return !isNaN(d) && d.getFullYear() === currentYear;
     }).length;
 
