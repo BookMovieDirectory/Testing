@@ -46,7 +46,7 @@ const Analytics = (() => {
       months[key] = 0;
     }
     items.forEach(item => {
-      const raw = item[dateField] || item.dateAdded || '';
+      const raw = item[dateField] || item.dateRead || '';
       if (!raw) return;
       const d = new Date(raw);
       if (isNaN(d)) return;
