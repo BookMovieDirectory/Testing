@@ -3,9 +3,135 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BookWorm — Your Personal Reading & Watching Diary</title>
+
+  <!-- ═══════════════════════════════════════════
+       SEO — Primary Meta Tags
+  ════════════════════════════════════════════ -->
+  <title>BookWorm — Free Personal Book & Movie Tracker | Reading Diary App</title>
+  <meta name="description" content="BookWorm is your free personal reading and movie diary. Track every book you've read, rate films, manage your wishlist, and visualize your reading habits — all stored privately on your device. No sign-up needed." />
+  <meta name="keywords" content="book tracker, reading diary, personal book log, movie tracker, reading list app, book wishlist, track books read, reading habit tracker, free book journal, offline book tracker" />
+  <meta name="author" content="BookWorm" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://yourdomain.com/index.html" />
+
+  <!-- ═══════════════════════════════════════════
+       SEO — Open Graph (Facebook / LinkedIn)
+  ════════════════════════════════════════════ -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://yourdomain.com/index.html" />
+  <meta property="og:title"       content="BookWorm — Free Personal Book & Movie Tracker" />
+  <meta property="og:description" content="Track every book you've read and film you've watched. Rate, review, manage wishlists, and explore your reading analytics — free, private, and beautifully designed." />
+  <meta property="og:image"       content="https://yourdomain.com/assets/bookworm-preview.png" />
+  <meta property="og:site_name"   content="BookWorm" />
+
+  <!-- ═══════════════════════════════════════════
+       SEO — Twitter Card
+  ════════════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:url"         content="https://yourdomain.com/index.html" />
+  <meta name="twitter:title"       content="BookWorm — Free Personal Book & Movie Tracker" />
+  <meta name="twitter:description" content="Your personal reading and movie diary. Track books, rate films, manage wishlists, and visualize your reading habits — 100% private, no account needed." />
+  <meta name="twitter:image"       content="https://yourdomain.com/assets/bookworm-preview.png" />
+
+  <!-- ═══════════════════════════════════════════
+       SEO — Structured Data: WebApplication
+  ════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "BookWorm",
+    "url": "https://yourdomain.com",
+    "description": "BookWorm is a free, private personal reading and movie tracker. Log books and films, rate and review them, manage wishlists, and explore analytics — all stored locally on your device with no account required.",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "BookWorm",
+      "url": "https://yourdomain.com"
+    },
+    "featureList": [
+      "Track books read, currently reading, and wishlist",
+      "Log movies watched and watchlist",
+      "5-star rating and personal review system",
+      "Genre tagging and smart filtering",
+      "Reading analytics and habit visualization",
+      "Import and export data as Excel files",
+      "100% private — all data stored locally on device",
+      "No account or sign-up required"
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════
+       SEO — Structured Data: SiteNavigationElement
+  ════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "name": ["Home", "Books", "Movies", "Analytics"],
+    "url": [
+      "https://yourdomain.com/index.html",
+      "https://yourdomain.com/books.html",
+      "https://yourdomain.com/movies.html",
+      "https://yourdomain.com/analytics.html"
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════
+       SEO — Structured Data: FAQPage
+  ════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is BookWorm free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. BookWorm is completely free. No subscription, no account, and no hidden fees."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is my reading data stored?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All your data is stored locally on your device. Nothing is sent to any server, making BookWorm fully private."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I track both books and movies with BookWorm?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. BookWorm lets you track your entire reading library and movie diary in one place, with ratings, reviews, and wishlists for both."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I export my book or movie data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can export your full collection as Excel files for backup, and import existing spreadsheets to migrate your data into BookWorm."
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
   <link rel="stylesheet" href="css/main.css" />
+
   <style>
     /* ── Hero ─────────────────────────────────── */
     .hero {
@@ -29,7 +155,6 @@
       pointer-events: none;
     }
 
-    /* Floating book decorations */
     .hero-deco {
       position: absolute;
       font-size: 2.5rem;
@@ -113,7 +238,6 @@
       letter-spacing: 0.03em;
     }
 
-    /* ── Ornament ────────────────────────────── */
     .ornament {
       font-size: 1.5rem;
       color: var(--accent-gold);
@@ -297,9 +421,7 @@
       color: var(--text-muted);
       transition: color var(--transition), transform var(--transition);
     }
-    .section-card:hover .go-arrow {
-      transform: translateX(4px);
-    }
+    .section-card:hover .go-arrow { transform: translateX(4px); }
     .section-card.books:hover .go-arrow  { color: var(--accent-main); }
     .section-card.movies:hover .go-arrow { color: #1A3A6B; }
 
@@ -339,34 +461,44 @@
       color: var(--text-muted);
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     @media (max-width: 640px) {
       .sections-grid { grid-template-columns: 1fr; }
       .home-stats { grid-template-columns: repeat(2, 1fr); }
       .pull-quote { padding: 1.5rem 1.5rem; }
     }
   </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-79SWSYS3K4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-79SWSYS3K4');
-</script>
-  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-79SWSYS3K4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-79SWSYS3K4');
+  </script>
+
 </head>
 <body>
 
   <!-- ── Navigation ──────────────────────────── -->
-  <nav class="navbar">
+  <nav class="navbar" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <span class="logo-icon">📚</span>
+      <a href="index.html" class="nav-logo" aria-label="BookWorm — Personal Book and Movie Tracker">
+        <span class="logo-icon" aria-hidden="true">📚</span>
         BookWorm
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">🏠 <span>Home</span></a></li>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" class="active" aria-current="page">🏠 <span>Home</span></a></li>
         <li><a href="books.html">📖 <span>Books</span></a></li>
         <li><a href="movies.html">🎬 <span>Movies</span></a></li>
         <li><a href="analytics.html">📊 <span>Analytics</span></a></li>
@@ -375,33 +507,32 @@
   </nav>
 
   <!-- ── Hero ─────────────────────────────────── -->
-  <section class="hero">
-    <!-- Floating decorations -->
-    <span class="hero-deco">📚</span>
-    <span class="hero-deco">🎬</span>
-    <span class="hero-deco">📖</span>
-    <span class="hero-deco">🎞️</span>
-    <span class="hero-deco">✍️</span>
-    <span class="hero-deco">🎭</span>
+  <section class="hero" aria-labelledby="hero-heading">
+    <span class="hero-deco" aria-hidden="true">📚</span>
+    <span class="hero-deco" aria-hidden="true">🎬</span>
+    <span class="hero-deco" aria-hidden="true">📖</span>
+    <span class="hero-deco" aria-hidden="true">🎞️</span>
+    <span class="hero-deco" aria-hidden="true">✍️</span>
+    <span class="hero-deco" aria-hidden="true">🎭</span>
 
     <div class="hero-content">
-      <span class="hero-eyebrow">✦ Your Personal Library ✦</span>
-      <h1>Every story<br />you've <em>lived</em></h1>
+      <span class="hero-eyebrow">✦ Your Personal Reading &amp; Movie Diary ✦</span>
+      <h1 id="hero-heading">Every story<br />you've <em>lived</em></h1>
       <p class="hero-sub">
-        Track the books you've devoured, the films you've savoured,
-        and the stories still waiting for you. Your reading & watching
-        diary, beautifully kept.
+        Track every book you've devoured and every film you've savoured.
+        BookWorm is your free, private reading and movie tracker — beautiful,
+        simple, and entirely yours. No sign-up. No cloud. Just your stories.
       </p>
       <div class="hero-cta">
-        <a href="books.html" class="btn btn-primary btn-hero">📖 My Books</a>
-        <a href="movies.html" class="btn btn-outline btn-hero">🎬 My Movies</a>
-        <a href="analytics.html" class="btn btn-gold btn-hero">📊 Analytics</a>
+        <a href="books.html" class="btn btn-primary btn-hero" aria-label="Go to My Books tracker">📖 My Books</a>
+        <a href="movies.html" class="btn btn-outline btn-hero" aria-label="Go to My Movies tracker">🎬 My Movies</a>
+        <a href="analytics.html" class="btn btn-gold btn-hero" aria-label="View your reading analytics">📊 Analytics</a>
       </div>
     </div>
   </section>
 
   <!-- ── Live Stats ────────────────────────────── -->
-  <div class="home-stats" id="home-stats">
+  <div class="home-stats" id="home-stats" aria-label="Your personal reading and movie statistics">
     <div class="hs-card">
       <div class="hs-number" id="hs-books-read">0</div>
       <div class="hs-label">Books Read</div>
@@ -421,90 +552,145 @@
   </div>
 
   <!-- ── Features ─────────────────────────────── -->
-  <section class="features-section">
+  <section class="features-section" aria-labelledby="features-heading">
     <div class="section-title">
-      <h2>Everything a bookworm needs</h2>
-      <p>Simple tools for the deeply literary soul</p>
+      <h2 id="features-heading">Everything a bookworm needs</h2>
+      <p>A free book and movie tracker built for the deeply literary soul — private, powerful, and beautifully designed.</p>
     </div>
     <div class="features-grid container">
-      <div class="feature-card">
-        <span class="feature-icon">📖</span>
-        <h3>Track Your Library</h3>
-        <p>Log every book — read, currently reading, or on your wishlist — with author, genre, rating, and personal notes.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🎬</span>
-        <h3>Movie Journal</h3>
-        <p>Keep a cinematic diary of films watched, directors admired, and movies eagerly awaiting your viewing.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">⭐</span>
-        <h3>Rate & Review</h3>
-        <p>Give each story a star rating and jot down your thoughts while the emotions are still fresh.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">📥</span>
-        <h3>Import & Export</h3>
-        <p>Export your entire collection as Excel files for backup. Import from existing spreadsheets to migrate your data.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🔒</span>
-        <h3>Entirely Private</h3>
-        <p>All your data stays on your device. No accounts, no servers, no tracking. Just you and your stories.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🔍</span>
-        <h3>Search & Filter</h3>
-        <p>Find any entry instantly. Filter by genre, sort by rating or date — your library, perfectly organised.</p>
-      </div>
+
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">📖</span>
+        <h3>Track Your Reading Library</h3>
+        <p>Log every book you've read, are currently reading, or plan to read next. Add author, genre, star rating, and personal notes to build your complete reading history.</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">🎬</span>
+        <h3>Personal Movie Journal</h3>
+        <p>Keep a cinematic diary of every film you've watched, the directors you admire, and movies on your watchlist. Your complete movie log in one place.</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">⭐</span>
+        <h3>Rate &amp; Review</h3>
+        <p>Give each book or film a 5-star rating and capture your thoughts while the emotions are still fresh. Build a rich personal review archive over time.</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">📥</span>
+        <h3>Import &amp; Export Your Data</h3>
+        <p>Export your entire book or movie collection as Excel files for easy backup. Import from existing spreadsheets to migrate your reading history into BookWorm instantly.</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">🔒</span>
+        <h3>100% Private — No Account Needed</h3>
+        <p>All your reading and movie data stays entirely on your device. No accounts, no servers, no tracking of any kind. BookWorm is the most private book tracker available.</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">🔍</span>
+        <h3>Search, Filter &amp; Organise</h3>
+        <p>Find any book or film instantly with powerful search. Filter by genre, sort by star rating or date added — keep your personal library perfectly organised at all times.</p>
+      </article>
+
     </div>
   </section>
 
   <!-- ── Quote ─────────────────────────────────── -->
-  <section class="quote-section">
-    <div class="divider"><span>✦</span></div>
+  <section class="quote-section" aria-label="Inspirational reading quote">
+    <div class="divider"><span aria-hidden="true">✦</span></div>
     <blockquote class="pull-quote">
       A reader lives a thousand lives before he dies. The man who never reads lives only one.
     </blockquote>
     <p class="quote-attr">— George R.R. Martin</p>
-    <div class="divider" style="margin-top:2.5rem"><span>✦</span></div>
+    <div class="divider" style="margin-top:2.5rem"><span aria-hidden="true">✦</span></div>
   </section>
 
   <!-- ── Section CTAs ──────────────────────────── -->
   <div class="sections-cta">
     <div class="section-title">
-      <h2>Begin your collection</h2>
-      <p>Choose a section to start tracking</p>
+      <h2>Start tracking your reading journey today</h2>
+      <p>Choose a section to begin building your personal library</p>
     </div>
     <div class="sections-grid">
-      <a href="books.html" class="section-card books">
-        <span class="sc-icon">📚</span>
+      <a href="books.html" class="section-card books" aria-label="Open the Books tracker to log your reading history">
+        <span class="sc-icon" aria-hidden="true">📚</span>
         <h2>Books</h2>
-        <p>Your reading history, wishlist, and literary reflections — all in one beautiful place.</p>
+        <p>Log every book you've read, rate your favorites, manage your reading wishlist, and capture your literary reflections — all in one beautiful place.</p>
         <span class="go-arrow">Open Library →</span>
       </a>
-      <a href="movies.html" class="section-card movies">
-        <span class="sc-icon">🎞️</span>
+      <a href="movies.html" class="section-card movies" aria-label="Open the Movies tracker to log your film history">
+        <span class="sc-icon" aria-hidden="true">🎞️</span>
         <h2>Movies</h2>
-        <p>Your cinematic journey, from beloved classics to films you're yet to discover.</p>
+        <p>Record every film you've watched, build your watchlist, and document your cinematic journey from timeless classics to the latest releases.</p>
         <span class="go-arrow">Open Cinema →</span>
       </a>
     </div>
   </div>
+
+  <!-- ══════════════════════════════════════════════
+       SEO — FAQ Section (mirrors JSON-LD FAQPage)
+  ═══════════════════════════════════════════════ -->
+  <section class="features-section" aria-labelledby="faq-heading" style="border-top:1px solid var(--border-color)">
+    <div class="section-title">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      <p>Everything you need to know about BookWorm</p>
+    </div>
+    <div style="max-width:720px;margin:0 auto;display:grid;gap:1.25rem;padding:0 1rem">
+
+      <details style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;padding:1.5rem">
+        <summary style="font-family:var(--font-display);font-size:1.05rem;font-style:italic;cursor:pointer">
+          Is BookWorm free to use?
+        </summary>
+        <p style="font-family:var(--font-alt);font-size:0.93rem;color:var(--text-secondary);font-style:italic;margin-top:0.75rem;line-height:1.7">
+          Yes — BookWorm is completely free. There is no subscription plan, no premium tier, and no hidden fees. Every feature is available to all users at no cost.
+        </p>
+      </details>
+
+      <details style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;padding:1.5rem">
+        <summary style="font-family:var(--font-display);font-size:1.05rem;font-style:italic;cursor:pointer">
+          Where is my reading and movie data stored?
+        </summary>
+        <p style="font-family:var(--font-alt);font-size:0.93rem;color:var(--text-secondary);font-style:italic;margin-top:0.75rem;line-height:1.7">
+          All your data is stored locally in your browser on your own device. Nothing is ever uploaded to a server. This makes BookWorm one of the most private book trackers available — your reading life belongs only to you.
+        </p>
+      </details>
+
+      <details style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;padding:1.5rem">
+        <summary style="font-family:var(--font-display);font-size:1.05rem;font-style:italic;cursor:pointer">
+          Can I track both books and movies with BookWorm?
+        </summary>
+        <p style="font-family:var(--font-alt);font-size:0.93rem;color:var(--text-secondary);font-style:italic;margin-top:0.75rem;line-height:1.7">
+          Absolutely. BookWorm includes a dedicated book tracker and a separate movie tracker, both with ratings, reviews, wishlists, and genre filtering — all in one unified reading and watching diary.
+        </p>
+      </details>
+
+      <details style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;padding:1.5rem">
+        <summary style="font-family:var(--font-display);font-size:1.05rem;font-style:italic;cursor:pointer">
+          Can I export my book or movie collection?
+        </summary>
+        <p style="font-family:var(--font-alt);font-size:0.93rem;color:var(--text-secondary);font-style:italic;margin-top:0.75rem;line-height:1.7">
+          Yes. You can export your full book or movie collection as an Excel file at any time, and import existing spreadsheets to migrate your data into BookWorm — perfect for readers switching from another tracking app.
+        </p>
+      </details>
+
+    </div>
+  </section>
 
   <!-- ── Footer ────────────────────────────────── -->
   <footer>
     <p>
       <span>BookWorm</span> — crafted for those who live between the pages.
       <br />
-      <small>All data stored locally on your device. No account needed.</small>
+      <small>Free personal book tracker &amp; movie diary. All data stored locally on your device. No account needed.</small>
     </p>
   </footer>
 
   <!-- ── Scripts ───────────────────────────────── -->
   <script src="js/storage.js"></script>
   <script>
-    // Populate home stats from localStorage
     document.addEventListener('DOMContentLoaded', () => {
       const bs = BookWormDB.Books.stats();
       const ms = BookWormDB.Movies.stats();
